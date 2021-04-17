@@ -30,8 +30,8 @@ For any fiber go application, just clone the repo & rename the application name.
 [Fiber](https://gofiber.io/) is an Express.js inspired web framework build on top of Fasthttp, the fastest HTTP engine for Go. Designed to ease things up for **fast** development with **zero memory allocation** and **performance** in mind.
 
 ## Tools & Libraries used
-- Golang 1.16
-- PostgreSQL
+- [Golang 1.16+](https://golang.org/doc/go1.16)
+- [PostgreSQL](https://www.postgresql.org/)
 - [Docker](https://www.docker.com/get-started)
 - [Fiber framework](https://github.com/gofiber/fiber)
 - [JWT](https://github.com/form3tech-oss/jwt-go)
@@ -141,7 +141,7 @@ DB_MAX_LIFETIME_CONNECTIONS=10
 
 ## 🔨 Docker development
 
-- Install **`docker`** & **`golang-migrate`**
+- Install **`docker`**, **`docker-compose`** & **`golang-migrate`**
 - Rename `.env.example` to `.env`
 - Start db container `docker-compose up db`
 - Run migrations `make migrate.up`
@@ -177,4 +177,4 @@ DB_MAX_LIFETIME_CONNECTIONS=10
 
 ## ⚠️ License
 
-MIT &copy; [H.R. Shadhin](https://github.com/hrshadhin)
+[MIT](https://opensource.org/licenses/MIT) &copy; [H.R. Shadhin](https://github.com/hrshadhin)
