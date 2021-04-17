@@ -7,19 +7,25 @@
   <a href="https://github.com/gofiber/fiber/releases">
     <img src="https://img.shields.io/github/v/release/gofiber/fiber?color=00ADD8&label=%F0%9F%9A%80%20">
   </a>
+  <a href="https://goreportcard.com/report/github.com/hrshadhin/fiber-go-boilerplate">
+    <img src="https://img.shields.io/badge/%F0%9F%93%9D%20goreport-A+-success">
+  </a>
   <a href="https://gocover.io/github.com/hrshadhin/fiber-go-boilerplate">
     <img src="https://img.shields.io/badge/%F0%9F%94%8E%20gocover-56.0%25-75C46B.svg?style=flat">
   </a>
-  <a href="https://github.com/hrshadhin/fiber-go-boilerplate/actions?query=workflow%3ASecurity">
+ <!-- <a href="https://github.com/hrshadhin/fiber-go-boilerplate/actions?query=workflow%3ASecurity">
     <img src="https://img.shields.io/github/workflow/status/hrshadhin/fiber-go-boilerplate/Security?label=%F0%9F%94%91%20gosec&style=flat&color=75C46B">
   </a>
   <a href="https://github.com/hrshadhin/fiber-go-boilerplate/actions?query=workflow%3ATest">
     <img src="https://img.shields.io/github/workflow/status/hrshadhin/fiber-go-boilerplate/Test?label=%F0%9F%A7%AA%20tests&style=flat&color=75C46B">
+  </a> -->
+  <a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-green.svg">
   </a>
 </p>
 
-Is a production-ready backend template with Fiber Go Web Framework. For any fiber go application, just clone the repo &
-rename the application name.
+Is a production-ready golang based boilerplate application with Fiber Go web framework.
+For any fiber go application, just clone the repo & rename the application name.
 
 [Fiber](https://gofiber.io/) is an Express.js inspired web framework build on top of Fasthttp, the fastest HTTP engine for Go. Designed to ease things up for **fast** development with **zero memory allocation** and **performance** in mind.
 
