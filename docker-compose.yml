@@ -1,0 +1,30 @@
+version: "3.5"
+
+services:
+  api:
+    container_name: fibergb-api
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes: # needed for CompileDaemon to detect file changes
+      - ./:/app
+    depends_on:
+      - db
+    ports:
+      - 5000:5000
+
+  db:
+    container_name: fibergb-postgres
+    image: postgres:latest
+    #    command: ["postgres", "-c", "log_statement=all"]
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=fiber_go_api
+    volumes:
+      - fibergbdata:/var/lib/postgresql/data
+
+volumes:
+  fibergbdata:

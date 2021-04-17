@@ -1,0 +1,15 @@
+# IDE files
+.vscode
+.DS_Store
+.idea
+
+# Dependencies
+vendor
+
+# Test
+*.out
+
+# Misc
+.env
+build/
+tmp/

@@ -1,0 +1,555 @@
+basePath: /api
+definitions:
+  controller.ErrorResponse:
+    properties:
+      msg:
+        type: string
+    type: object
+  controller.TokenResponse:
+    properties:
+      access_token:
+        type: string
+      msg:
+        type: string
+    type: object
+  dto.User:
+    properties:
+      created_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: integer
+      is_active:
+        type: boolean
+      is_admin:
+        type: boolean
+      last_name:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  model.Auth:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  model.Book:
+    properties:
+      author:
+        type: string
+      created_at:
+        type: string
+      id:
+        type: string
+      is_deleted:
+        type: boolean
+      meta:
+        $ref: '#/definitions/model.Meta'
+      status:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    required:
+    - author
+    - meta
+    - status
+    - title
+    - user_id
+    type: object
+  model.CreateUser:
+    properties:
+      email:
+        type: string
+      first_name:
+        type: string
+      is_active:
+        type: boolean
+      is_admin:
+        type: boolean
+      last_name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - first_name
+    - last_name
+    - password
+    - username
+    type: object
+  model.Meta:
+    properties:
+      description:
+        type: string
+      picture:
+        type: string
+      rating:
+        type: integer
+    type: object
+  model.UpdateUser:
+    properties:
+      first_name:
+        type: string
+      is_active:
+        type: boolean
+      is_admin:
+        type: boolean
+      last_name:
+        type: string
+    required:
+    - first_name
+    - last_name
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: dev@hrshadhin.me
+    name: H.R. Shadhin
+  description: Fiber go web framework based REST API boilerplate
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Fiber Go API
+  version: "1.0"
+paths:
+  /v1/books:
+    get:
+      consumes:
+      - application/json
+      description: Get all exists book.
+      parameters:
+      - description: Page no
+        in: query
+        name: page
+        type: integer
+      - description: records per page
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Book'
+            type: array
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: get all exists book
+      tags:
+      - Book
+    post:
+      consumes:
+      - application/json
+      description: Create a new book.
+      parameters:
+      - description: Create new book
+        in: body
+        name: createbook
+        required: true
+        schema:
+          $ref: '#/definitions/model.Book'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: '#/definitions/model.Book'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: create a new book
+      tags:
+      - Book
+  /v1/books/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: object
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: delete a book
+      tags:
+      - Book
+    get:
+      consumes:
+      - application/json
+      description: a book.
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Book'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: get a book
+      tags:
+      - Book
+    put:
+      consumes:
+      - application/json
+      description: update book
+      parameters:
+      - description: Book ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update a book
+        in: body
+        name: updatebook
+        required: true
+        schema:
+          $ref: '#/definitions/model.Book'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Book'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: update a book
+      tags:
+      - Book
+  /v1/token/new:
+    post:
+      consumes:
+      - application/json
+      description: Create a new access token.
+      parameters:
+      - description: Request for token
+        in: body
+        name: login
+        required: true
+        schema:
+          $ref: '#/definitions/model.Auth'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: '#/definitions/controller.TokenResponse'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      summary: create a new access token
+      tags:
+      - Token
+  /v1/users:
+    get:
+      consumes:
+      - application/json
+      description: Get all exists user.
+      parameters:
+      - description: Page no
+        in: query
+        name: page
+        type: integer
+      - description: records per page
+        in: query
+        name: page_size
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dto.User'
+            type: array
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get all exists user
+      tags:
+      - User
+    post:
+      consumes:
+      - application/json
+      description: Create a new user.
+      parameters:
+      - description: Create new user
+        in: body
+        name: createuser
+        required: true
+        schema:
+          $ref: '#/definitions/model.CreateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ok
+          schema:
+            $ref: '#/definitions/dto.User'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "409":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: create a new user
+      tags:
+      - User
+  /v1/users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: delete user
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Ok
+          schema:
+            type: object
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: delete a user
+      tags:
+      - User
+    get:
+      consumes:
+      - application/json
+      description: a user.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: get a user
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: first_name, last_name, is_active, is_admin only
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update a user
+        in: body
+        name: updateuser
+        required: true
+        schema:
+          $ref: '#/definitions/model.UpdateUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.User'
+        "400":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "401":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "403":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "404":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+        "500":
+          description: Error
+          schema:
+            $ref: '#/definitions/controller.ErrorResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: update a user
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
